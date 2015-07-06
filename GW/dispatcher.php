@@ -37,7 +37,7 @@ class dispatcher
 
         $Ins = new $className();
 
-        if(!empty($query)){
+        if (!empty($query)) {
             $Ins->$action($query);
         }
         $Ins->$action();
