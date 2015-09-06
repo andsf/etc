@@ -3,7 +3,7 @@
 //
 // use app\model\Dao;
 //
-require_once '/Dao.php';
+require_once 'Dao.php';
 
 class Bbs
 {

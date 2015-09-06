@@ -3,7 +3,7 @@
 class dispatcher
 {
 
-    const SEARCH_STRING = '/doc/test/GW/app/';
+    const SEARCH_STRING = '/doc/etc/GW/app/';
     const SYSROOT_CONTROLLER = 'app/controller/';
     const DEFAULT_CLASS = 'Bbs';
     const DEFAULT_ACTION = 'index';
