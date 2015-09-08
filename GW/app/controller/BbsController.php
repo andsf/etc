@@ -58,4 +58,12 @@ class BbsController
 
     }
 
+    public function allDelete($params = null)
+    {
+       $db = new Bbs();
+       if (!empty($params)) {
+          $db->deleteArticle($params);
+       } else {
+         $db->deleteArticle()
+       }
 }

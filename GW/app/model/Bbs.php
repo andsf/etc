@@ -94,4 +94,9 @@ class Bbs
         //     return false;
         // }
     }
+
+    public function deleteArticle($id, $logic = false)
+    {
+       
+    }
 }
