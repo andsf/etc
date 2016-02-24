@@ -6,7 +6,7 @@
 require_once 'app/model/Bbs.php';
 require_once 'app/lib/Module.php';
 
-class BbsController extends App
+class BbsController
 {
     public function index(){
         $ret = Bbs::ins()->select();

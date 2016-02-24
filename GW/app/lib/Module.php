@@ -21,7 +21,7 @@ class Module extends App implements ModuleInterface
      * @param  array $query [$key => $val,...] is ?$key=$val
      * @return obj
      */
-    public function redirect(string $path, $query = null)
+    public function redirect(string $path, array $query = null)
     {
         if (!empty($query)) {
             foreach ($query as $num => $val) {
