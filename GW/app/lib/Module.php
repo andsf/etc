@@ -1,6 +1,6 @@
 <?php
 
-require_once 'app/controller/lib/interface/ModuleInterface'
+require_once 'app/lib/interface/ModuleInterface.php';
 require_once 'app/App.php';
 
 class Module extends App implements ModuleInterface
@@ -9,7 +9,7 @@ class Module extends App implements ModuleInterface
      * disp view
      * @param  string $path
      */
-    public function display($path)
+    public function display(string $path)
     {
         include($path);
         exit();
@@ -21,7 +21,7 @@ class Module extends App implements ModuleInterface
      * @param  array $query [$key => $val,...] is ?$key=$val
      * @return obj
      */
-    public function redirect($path, $query = null)
+    public function redirect(string $path, $query = null)
     {
         if (!empty($query)) {
             foreach ($query as $num => $val) {

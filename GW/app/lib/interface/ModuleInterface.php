@@ -2,11 +2,7 @@
 
 interface ModuleInterface
 {
-    public function display(string $path, string $query);
+    public function display(string $path);
 
     public function redirect(string $path);
-
-    public function ins();
-
-
 }

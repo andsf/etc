@@ -2,8 +2,8 @@
 // namespace app\model;
 //
 // use app\model\Dao;
-//
-require_once '/Dao.php';
+
+require_once 'Dao.php';
 require_once 'app/App.php';
 
 class Bbs extends App
