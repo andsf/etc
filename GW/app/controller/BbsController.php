@@ -1,12 +1,10 @@
 <?php
-// namespace app\controller;
-//
-// use app\model\Bbs;
+namespace app\controller;
 
-require_once 'app/model/Bbs.php';
-require_once 'app/lib/Module.php';
+use app\model\Bbs;
+use app\App;
 
-class BbsController
+class BbsController extends App
 {
     public function index(){
         $ret = Bbs::ins()->select();

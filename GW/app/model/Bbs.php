@@ -1,10 +1,8 @@
 <?php
-// namespace app\model;
-//
-// use app\model\Dao;
+namespace app\model;
 
-require_once 'Dao.php';
-require_once 'app/App.php';
+use app\model\Dao;
+use app\App;
 
 class Bbs extends App
 {

@@ -4,7 +4,7 @@ class dispatcher
 {
 
     const SEARCH_STRING = '';//Specify the location of the directory
-    const SYSROOT_CONTROLLER = 'app/controller/';
+    const SYSROOT_CONTROLLER = 'app\\controller\\';
     const DEFAULT_CLASS = 'Bbs';
     const DEFAULT_ACTION = 'index';
 
@@ -12,7 +12,7 @@ class dispatcher
      * request dispache
      * @return
      */
-    public function Dispatch($path)
+    public function dispatch($path)
     {
         // /Bbs/insert
         $requestUrl = str_replace(self::SEARCH_STRING,'/',$path);
@@ -31,11 +31,10 @@ class dispatcher
             }
         }
 
-        $className  = $class.'Controller';
+        $className  = self::SYSROOT_CONTROLLER.$class.'Controller';
 
-        require_once self::SYSROOT_CONTROLLER.$className.'.php';
-
-        $Ins = new $className();
+        // require_once self::SYSROOT_CONTROLLER.$className.'.php';
+        $Ins = $className::ins();
 
         if (!empty($query)) {
             $Ins->$action($query);

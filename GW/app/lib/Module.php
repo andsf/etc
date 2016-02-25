@@ -1,9 +1,11 @@
 <?php
+namespace app\lib;
 
-require_once 'app/lib/interface/ModuleInterface.php';
-require_once 'app/App.php';
+use app\App;
+// use app\lib\package\ModuleInterface;
 
-class Module extends App implements ModuleInterface
+// class Module extends App implements ModuleInterface
+class Module extends App
 {
     /**
      * disp view
