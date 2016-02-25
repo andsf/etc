@@ -15,7 +15,7 @@ class Dao
     private function connection()
     {
         try{
-            $pdo = new \PDO('mysql:host=localhost; dbname=gw; charset=utf8','root','');
+            $pdo = new \PDO('mysql:host=localhost; dbname=kadai; charset=utf8','root','');
         }catch(PDOException $e){
             exit('データベース接続失敗'.$e->getMessage());
         }
