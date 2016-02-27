@@ -1,8 +1,8 @@
 <?php
 namespace app\controller;
 
-use app\model\Bbs;
 use app\App;
+use app\sql\Bbs;
 
 class BbsController extends App
 {

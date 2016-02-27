@@ -1,7 +1,7 @@
 <?php
-namespace app\model;
+namespace app\sql;
 
-use app\model\Dao;
+use app\sql;
 use app\App;
 
 class Bbs extends App

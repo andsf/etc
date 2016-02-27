@@ -1,13 +1,14 @@
 <?php
-$namespaces = [
+$targetDirs = [
     'app',
     'app/controller',
     'app/lib',
-    'app/model',
+    'app/sql',
+    'app/sql/Dao'
 ];
 
-foreach ($namespaces as $namespace) {
-    $files = glob($namespace.'/*.php');
+foreach ($targetDirs as $dir) {
+    $files = glob($dir.'/*.php');
     foreach ($files as $file) {
         require_once $file;
     }
