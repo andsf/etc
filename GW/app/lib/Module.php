@@ -2,9 +2,7 @@
 namespace app\lib;
 
 use app\App;
-// use app\lib\package\ModuleInterface;
 
-// class Module extends App implements ModuleInterface
 class Module extends App
 {
     /**
