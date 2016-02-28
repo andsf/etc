@@ -5,7 +5,7 @@ class dispatcher
 
     const SEARCH_STRING = '';//Specify the location of the directory
     const SYSROOT_CONTROLLER = 'app\\controller\\';
-    const DEFAULT_CLASS = 'Bbs';
+    const DEFAULT_CLASS = 'Auth';
     const DEFAULT_ACTION = 'index';
 
     /**
@@ -17,7 +17,7 @@ class dispatcher
         // /Bbs/insert
         $requestUrl = str_replace(self::SEARCH_STRING,'/',$path);
 
-        if($requestUrl === '/' || strlen($requestUrl) !== 1){
+        if($requestUrl === '/'){
             $class  = self::DEFAULT_CLASS;
             $action = self::DEFAULT_ACTION;
         }else{
@@ -29,11 +29,11 @@ class dispatcher
             if(!empty($params[3])){
                 $query  = $params[3];
             }
+            //TODO クエリパラメータ2つ目以降対応
         }
 
         $className  = self::SYSROOT_CONTROLLER.$class.'Controller';
 
-        // require_once self::SYSROOT_CONTROLLER.$className.'.php';
         $Ins = $className::ins();
 
         if (!empty($query)) {

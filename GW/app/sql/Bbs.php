@@ -1,7 +1,6 @@
 <?php
 namespace app\sql;
 
-use app\sql;
 use app\App;
 
 class Bbs extends App

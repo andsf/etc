@@ -1,4 +1,4 @@
 # RewriteEngine On | Off
 RewriteEngine On
 
-RewriteRule app/ index.php
+RewriteRule ^(.+)$ index.php [L]
