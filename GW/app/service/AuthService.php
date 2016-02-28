@@ -18,7 +18,7 @@ class AuthService extends App
         if (empty($this->auth->login($mail, $pass))) {
             return false;
         }
-        //TODO session処理
+        //TODO user情報をsessionに追加
         return true;
     }
 }

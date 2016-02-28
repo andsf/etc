@@ -29,7 +29,7 @@ class Module extends App
     }
 
     /**
-     * run redirect
+     * redirect base.
      * @param  string $path
      * @return obj
      */
@@ -74,6 +74,10 @@ class Module extends App
         $this->runRedirect($this->redirectPath);
     }
 
+    /**
+     * run redirect.
+     * @param  string $path
+     */
     private function runRedirect($path)
     {
         return header('Location: '.$path);
