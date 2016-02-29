@@ -28,12 +28,12 @@ CREATE TABLE `entry` (
   `title` varchar(256) NOT NULL,
   `text` varchar(1000) DEFAULT NULL,
   `file_path` varchar(256) DEFAULT NULL,
-  `created_at` datetime NOT NULL,
-  `created_by` int(11) NOT NULL,
-  `updated_at` datetime NOT NULL,
-  `updated_by` int(11) NOT NULL,
-  `deleted_at` datetime NOT NULL,
-  `deleted_by` int(11) NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `updated_by` int(11) DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  `deleted_by` int(11) DEFAULT NULL,
   `deleted_flag` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -58,13 +58,13 @@ DROP TABLE IF EXISTS `login`;
 CREATE TABLE `login` (
   `id` int(4) NOT NULL AUTO_INCREMENT COMMENT 'auto_incriment',
   `user_id` int(4) NOT NULL COMMENT 'foreign key',
-  `password` int(11) NOT NULL,
-  `created_at` datetime NOT NULL,
-  `created_by` int(11) NOT NULL,
-  `updated_at` datetime NOT NULL,
-  `updated_by` int(11) NOT NULL,
-  `deleted_at` datetime NOT NULL,
-  `deleted_by` int(11) NOT NULL,
+  `password` varchar(16) NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `updated_by` int(11) DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  `deleted_by` int(11) DEFAULT NULL,
   `deleted_flag` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -90,12 +90,12 @@ CREATE TABLE `user` (
   `id` int(4) NOT NULL AUTO_INCREMENT COMMENT 'auto_incriment',
   `user_name` varchar(256) NOT NULL COMMENT 'unique',
   `mail_address` varchar(256) NOT NULL COMMENT 'unique',
-  `created_at` datetime NOT NULL,
-  `created_by` int(11) NOT NULL,
-  `updated_at` datetime NOT NULL,
-  `updated_by` int(11) NOT NULL,
-  `deleted_at` datetime NOT NULL,
-  `deleted_by` int(11) NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `updated_by` int(11) DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  `deleted_by` int(11) DEFAULT NULL,
   `deleted_flag` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_name` (`user_name`)
@@ -120,4 +120,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-02-29  5:20:16
+-- Dump completed on 2016-02-29  5:55:35
