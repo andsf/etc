@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.26, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.29, for Linux (x86_64)
 --
 -- Host: localhost    Database: kadai
 -- ------------------------------------------------------
--- Server version	5.6.26
+-- Server version	5.6.29
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,36 +16,36 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `description`
+-- Table structure for table `entry`
 --
 
-DROP TABLE IF EXISTS `description`;
+DROP TABLE IF EXISTS `entry`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `description` (
+CREATE TABLE `entry` (
   `id` int(4) NOT NULL AUTO_INCREMENT COMMENT 'auto_incriment',
   `user_id` int(4) NOT NULL,
   `title` varchar(256) NOT NULL,
   `text` varchar(1000) DEFAULT NULL,
   `file_path` varchar(256) DEFAULT NULL,
-  `create_at` datetime NOT NULL,
-  `create_by` int(11) NOT NULL,
-  `update_at` datetime NOT NULL,
-  `update_by` int(11) NOT NULL,
-  `delete_at` datetime NOT NULL,
-  `delete_by` int(11) NOT NULL,
-  `delete_flag` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` datetime NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `updated_by` int(11) NOT NULL,
+  `deleted_at` datetime NOT NULL,
+  `deleted_by` int(11) NOT NULL,
+  `deleted_flag` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `description`
+-- Dumping data for table `entry`
 --
 
-LOCK TABLES `description` WRITE;
-/*!40000 ALTER TABLE `description` DISABLE KEYS */;
-/*!40000 ALTER TABLE `description` ENABLE KEYS */;
+LOCK TABLES `entry` WRITE;
+/*!40000 ALTER TABLE `entry` DISABLE KEYS */;
+/*!40000 ALTER TABLE `entry` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -59,13 +59,13 @@ CREATE TABLE `login` (
   `id` int(4) NOT NULL AUTO_INCREMENT COMMENT 'auto_incriment',
   `user_id` int(4) NOT NULL COMMENT 'foreign key',
   `password` int(11) NOT NULL,
-  `create_at` datetime NOT NULL,
-  `create_by` int(11) NOT NULL,
-  `update_at` datetime NOT NULL,
-  `update_by` int(11) NOT NULL,
-  `delete_at` datetime NOT NULL,
-  `delete_by` int(11) NOT NULL,
-  `delete_flag` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` datetime NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `updated_by` int(11) NOT NULL,
+  `deleted_at` datetime NOT NULL,
+  `deleted_by` int(11) NOT NULL,
+  `deleted_flag` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -90,13 +90,13 @@ CREATE TABLE `user` (
   `id` int(4) NOT NULL AUTO_INCREMENT COMMENT 'auto_incriment',
   `user_name` varchar(256) NOT NULL COMMENT 'unique',
   `mail_address` varchar(256) NOT NULL COMMENT 'unique',
-  `create_at` datetime NOT NULL,
-  `create_by` int(11) NOT NULL,
-  `update_at` datetime NOT NULL,
-  `update_by` int(11) NOT NULL,
-  `delete_at` datetime NOT NULL,
-  `delete_by` int(11) NOT NULL,
-  `delete_flag` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` datetime NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `updated_by` int(11) NOT NULL,
+  `deleted_at` datetime NOT NULL,
+  `deleted_by` int(11) NOT NULL,
+  `deleted_flag` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_name` (`user_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -120,4 +120,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-02-27 18:52:11
+-- Dump completed on 2016-02-29  5:20:16
