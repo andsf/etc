@@ -25,9 +25,9 @@ DROP TABLE IF EXISTS `entry`;
 CREATE TABLE `entry` (
   `id` int(4) NOT NULL AUTO_INCREMENT COMMENT 'auto_incriment',
   `user_id` int(4) NOT NULL,
-  `title` varchar(256) NOT NULL,
-  `text` varchar(1000) DEFAULT NULL,
-  `file_path` varchar(256) DEFAULT NULL,
+  `title` varchar(128) CHARACTER SET utf8 NOT NULL,
+  `text` text CHARACTER SET utf8 COLLATE utf8,
+  `file_path` varchar(128) CHARACTER SET utf8 DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `created_by` int(11) DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
@@ -58,14 +58,7 @@ DROP TABLE IF EXISTS `login`;
 CREATE TABLE `login` (
   `id` int(4) NOT NULL AUTO_INCREMENT COMMENT 'auto_incriment',
   `user_id` int(4) NOT NULL COMMENT 'foreign key',
-  `password` varchar(16) NOT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `created_by` int(11) DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  `updated_by` int(11) DEFAULT NULL,
-  `deleted_at` datetime DEFAULT NULL,
-  `deleted_by` int(11) DEFAULT NULL,
-  `deleted_flag` tinyint(1) NOT NULL DEFAULT '0',
+  `password` varchar(16) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -88,15 +81,8 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
   `id` int(4) NOT NULL AUTO_INCREMENT COMMENT 'auto_incriment',
-  `user_name` varchar(256) NOT NULL COMMENT 'unique',
-  `mail_address` varchar(256) NOT NULL COMMENT 'unique',
-  `created_at` datetime DEFAULT NULL,
-  `created_by` int(11) DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  `updated_by` int(11) DEFAULT NULL,
-  `deleted_at` datetime DEFAULT NULL,
-  `deleted_by` int(11) DEFAULT NULL,
-  `deleted_flag` tinyint(1) NOT NULL DEFAULT '0',
+  `user_name` varchar(128) CHARACTER SET utf8 NOT NULL COMMENT 'unique',
+  `mail_address` varchar(128) CHARACTER SET utf8 NOT NULL COMMENT 'unique',
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_name` (`user_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -120,4 +106,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-02-29  5:55:35
+-- Dump completed on 2016-02-29  9:56:18
