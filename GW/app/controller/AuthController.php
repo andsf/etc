@@ -21,7 +21,7 @@ class AuthController extends App
 
     public function index()
     {
-        if ($this->session->has('vaildError')) {
+        if ($this->session->has(['vaildError'])) {
             $errMsg = $this->session->get('vaildError');
             return $this->module->view('app/view/login.php', compact('errMsg'));
         }
@@ -34,12 +34,12 @@ class AuthController extends App
     public function login()
     {
         $inputData = $_POST;
-        if (empty($inputData)) {
-            return $this->module->redirect('app/view/login.php')->with(['validError' => 'ログインに失敗しました。']);
+        if (empty($inputData['mailaddress']) || empty($imput['password'])) {
+            return $this->module->redirect('/')->with(['vaildError' => 'ログインに失敗しました。']);
         }
 
         if ($this->authService->login()){
-            return $this->module->redirect('app/view/bbs.php')->with();
+            return $this->module->redirect('/Bbs/index')->with();
         }
     }
 }

@@ -22,10 +22,10 @@ class Session extends App
     {
         foreach ($targets as $sessionName) {
             if (isset($_SESSION[$sessionName])) {
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     /**
@@ -33,7 +33,8 @@ class Session extends App
      */
     public function get($target)
     {
-        return $_session[$target];
+    //    var_dump($_SESSION[$target], $target);
+        return $_SESSION[$target];
     }
 
     /**

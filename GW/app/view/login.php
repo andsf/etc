@@ -1,15 +1,15 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <link rel="stylesheet" type="text/css" href="app/public/css/login.css">
+  <!-- <link rel="stylesheet" type="text/css" href="app/public/css/login.css"> -->
 </head>
 <body>
   <div class="login-box">
     <div class="login-inner-box">
-      <form method="post" action="/auth/login">
-      <?= if (isset($errMsg)): ?>
+      <form method="post" action="/Auth/login">
+      <?php if(isset($errMsg)): ?>
       <div><?= $errMsg ?></div>
-      <?= endif; ?>
+      <?php endif; ?>
       <table>
         <tr>
           <th>メールアドレス</th>
