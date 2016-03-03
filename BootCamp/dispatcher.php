@@ -3,21 +3,21 @@
 class dispatcher
 {
 
-    const SEARCH_STRING = '/doc/test/GW/app/';
-    const SYSROOT_CONTROLLER = 'app/controller/';
-    const DEFAULT_CLASS = 'Bbs';
+    const SEARCH_STRING = '';//Specify the location of the directory
+    const SYSROOT_CONTROLLER = 'app\\controller\\';
+    const DEFAULT_CLASS = 'Auth';
     const DEFAULT_ACTION = 'index';
 
     /**
      * request dispache
      * @return
      */
-    public function Dispatch($path)
+    public function dispatch($path)
     {
         // /Bbs/insert
         $requestUrl = str_replace(self::SEARCH_STRING,'/',$path);
 
-        if($requestUrl === '/' || strlen($requestUrl) !== 1){
+        if($requestUrl === '/'){
             $class  = self::DEFAULT_CLASS;
             $action = self::DEFAULT_ACTION;
         }else{
@@ -29,13 +29,12 @@ class dispatcher
             if(!empty($params[3])){
                 $query  = $params[3];
             }
+            //TODO クエリパラメータ2つ目以降対応
         }
 
-        $className  = $class.'Controller';
+        $className  = self::SYSROOT_CONTROLLER.$class.'Controller';
 
-        require_once self::SYSROOT_CONTROLLER.$className.'.php';
-
-        $Ins = new $className();
+        $Ins = $className::ins();
 
         if (!empty($query)) {
             $Ins->$action($query);

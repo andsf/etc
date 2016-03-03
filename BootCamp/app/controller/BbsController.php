@@ -1,23 +1,20 @@
 <?php
-// namespace app\controller;
-//
-// use app\model\Bbs;
+namespace app\controller;
 
-require_once 'app/model/Bbs.php';
+use app\App;
+use app\sql\Bbs;
 
-class BbsController
+class BbsController extends App
 {
     public function index(){
-        $db = new Bbs();
-        $ret = $db->select();
+        $ret = Bbs::ins()->select();
         include('app/view/bbs.php');
     }
 
     public function insert(){
         $params = $_POST;
         if(isset($params['title']) && isset($params['comment'])){
-            $db = new Bbs();
-            $ret = $db->insert($params);
+            $ret = Bbs::ins()->insert($params);
             header('Location: http://'.$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF']);
             exit();
         }
@@ -26,8 +23,7 @@ class BbsController
 
     public function logicDelete($query){
         if(isset($query)){
-            $db = new Bbs();
-            $db->logicDelete($query);
+            Bbs::ins()->logicDelete($query);
         }
         header('Location: http://'.$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF']);
         exit();
@@ -35,23 +31,20 @@ class BbsController
 
     public function delete($query){
         if(isset($query)){
-            $db = new Bbs();
-            $db->delete($query);
+            Bbs::ins()->delete($query);
         }
         header('Location: http://'.$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF']);
         exit();
     }
 
     public function update($query){
-        $date   = $_POST;
+        $date = $_POST;
         if(isset($query) && empty($date)){
-            $db = new Bbs();
-            $ret = array_pop($db->select($query));
+            $ret = array_pop(Bbs::ins()->select($query));
             include('app/view/update.php');
             exit();
         }else{
-            $db = new Bbs();
-            $db->update($date);
+            Bbs::ins()->update($date);
             header('Location: http://'.$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF']);
             exit();
         }

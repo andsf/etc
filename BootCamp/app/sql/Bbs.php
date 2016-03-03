@@ -1,11 +1,9 @@
 <?php
-// namespace app\model;
-//
-// use app\model\Dao;
-//
-require_once '/Dao.php';
+namespace app\sql;
 
-class Bbs
+use app\App;
+
+class Bbs extends App
 {
     public function select($id = NULL){
         if(is_null($id)){
@@ -23,10 +21,6 @@ class Bbs
     *@return bool
     */
     public function insert(array $params){
-        // try{
-        //     Dao::Connect()->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        //     Dao::Connect()->beginTransaction();
-        //
             $data = Dao::Connect()->prepare("INSERT INTO comment_table (title,comment,create_date) VALUES (:title, :comment, :create_date)");
 
             $data->bindValue(':title', $params['title']);
@@ -37,13 +31,6 @@ class Bbs
             }else{
                 return false;
             }
-
-        //     Dao::Connect()->commit();
-        //     return true;
-        // }catch(Exception $e){
-        //     Dao::Connect()->rollback();
-        //     return false;
-        // }
     }
 
     public function logicDelete($id){
