@@ -1,9 +1,11 @@
 <?php
 require_once './vendor/autoload.php';
-echo 'test';
-//$app = new Silex\Application();
 
-//require_once __DIR__.'dispatchar.php';
-//require_once 'router.php';
+#start silex application.
+$app = new Silex\Application();
 
-//$app->run();
+#require route.php.
+require_once './app/router.php';
+
+#run
+$app->run();
