@@ -1,2 +1,3 @@
 RewriteEngine On
+RewriteCond %{REQUEST_URL}!^/public/*.*$
 RewriteRule ^(.+)$ index.php [L]
