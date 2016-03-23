@@ -1,10 +1,12 @@
 <?php 
 namespace Silex\Controllers;
 
+use Silex\Application;
+
 class HelloController 
 {
-    public function index()
+    public function index(Application $app)
     {
-        var_dump('hello');exit;
+        return $app['twig']->render('hello.twig', ['name' => 'Silex']);
     }
 }
