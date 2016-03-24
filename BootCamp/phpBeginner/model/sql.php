@@ -33,4 +33,15 @@ class Sql
         $data->execute();
         return $data->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+    /**
+     * 掲示板データ取得
+     */
+    public function getBbsData()
+    {
+        $sql = 'select * from description as d inner join user as u on d.user_id = u.id';
+        $data = $this->connection()->prepare($sql);
+        $data->execute();
+        return $data->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }
