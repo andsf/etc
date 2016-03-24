@@ -22,7 +22,7 @@ class Auth extends App
                     where
                     u.mail_address = :mail
                     and
-                    l.password = :pass,'
+                    l.password = :pass,';
         $data = Dao::connect()->prepare($sql);
         $data->bindValue(':mail', $mail);
         $data->bindValue(':pass', $pass);
