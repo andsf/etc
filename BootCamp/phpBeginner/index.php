@@ -1,3 +1,31 @@
+<?php
+//ファイル読み込み
+require_once './sql.php';
+require_once './session.php';
+
+//各ファイルのインスタンス作成
+$sql = new Sql();
+$session = new Session();
+
+//loginフォームからデータ取得
+$data = $_POST;
+
+//フォーム入力がない場合はリダイレクト
+if (empty($data)) {
+	return header('Location: http://'.$_SERVER['HTTP_HOST'].'/bootcamp/phpBeginner/index.php');
+}
+
+//login確認（DBの値を参照）
+$result = $sql->checkLogin($data['mailaddress'], $data['password']);
+
+if (!empty($result)) {
+	$addData = ['mailaddress' => $result[0]['mail_address'], 'name' => $result[0]['user_name']];
+	$session->add($addData);
+} else {
+	return header('Location: http://'.$_SERVER['HTTP_HOST'].'/bootcamp/phpBeginner/login.php');
+}
+
+?>
 
 <HTML>
 <HEAD>
@@ -24,7 +52,7 @@
 
 <table class="table table-striped table-bordered table-condensed">
 <table border="2" cellpadding="3">
-<thead style="background-color:#87cefa;">
+	<thead style="background-color:#87cefa;">
 <tr><th>タイトル</th><th>編集</th><th>削除</th><th>論理削除</th></tr>
 </thead>
 
@@ -43,7 +71,7 @@
 	  <td><a href='delete.php?id=<?php echo $id ?>' onClick='return check();'>削除</a></td>
 	  <td><a href='deleteflg.php?id=<?php echo $id ?>'>論理削除</a></td>
 	  </tr>
-<?php	  
+<?php
 	}
 ?>
 </table>
