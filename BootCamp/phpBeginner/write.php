@@ -1,41 +1,37 @@
 <?php
-  //データの受け取り
-  $title = $_POST['title'];
-  $body = $_POST['body'];
-  
-  //必須項目チェック
-  if($body == ''){
-    header('Location:index.php');  //最初のページ.phpへ移動
-    exit();  //終了
-  }
-  
-  //DB接続
-  $dsn = 'mysql:host=localhost;dbname=gwbbs;charset=utf8';
-  $user = 'bbsuser01';
-  $password = 'pass';
-  
-  
-  
-//例外処理
-  try{
-    $db = new PDO($dsn,$user,$password);  //PDO(PHPの拡張機能：抽象化レイヤを作って各DBに対応させる)
-    $db->setAttribute(PDO::ATTR_EMULATE_PREPARES,false);
-    //プリペアドステートメントを作成（PDOインスタンスのメソッドを実行する）
-    $stmt = $db->prepare("
-      INSERT INTO bbs (title,body,date)
-      VALUES (:title,:body,now())"
-    );
-    
-    //パラメータを割り当て
-    $stmt->bindParam(':title',$title,PDO::PARAM_STR);
-    $stmt->bindParam(':body',$body,PDO::PARAM_STR);
-    //クエリの実行
-    $stmt->execute();
-    
-    
-    header('Location:index.php');
-    exit();
-  } catch(PDOException $e){
-    die('エラー：' . $e->getMessage());
-  }
-  
+//ファイル読み込み
+require_once './model/sql.php';
+require_once './model/session.php';
+require_once './model/cookie.php';
+
+//インスタンス作成
+$sql     = new Sql();
+$cookie  = new Cookie();
+$session = new Session();
+
+//ゲットアクセスを禁止する
+if ($_SERVER["REQUEST_METHOD"] == 'GET') {
+    if (!$cookie->has('loginUser')) {
+        //バリデーション対応
+        return header('Location: http://'.$_SERVER['HTTP_HOST'].'/login.php');
+    }
+    //バリデーション対応
+    return header('Location: http://'.$_SERVER['HTTP_HOST'].'/index.php');
+}
+
+//postデータを取得
+$data = $_POST;
+
+//ユーザーデータ取得
+$userData = $session->get($cookie->get('loginUser'));
+//テキストがあるか確認、ない場合はnullを入れる
+$text = isset($date['text']) ? $data['text'] : null;
+//insert文　実行
+$ret = $sql->insert($userData['id'], $data['title'], $text);
+
+//判定
+if ($ret) {
+    return header('Location: http://'.$_SERVER['HTTP_HOST'].'/index.php');
+} else {
+    //TODO エラー処理
+}

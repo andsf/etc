@@ -46,4 +46,18 @@ class Sql
         $data->execute();
         return $data->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+    /**
+     * 掲示板新規投稿
+     */
+    public function insert($id, $title, $text = null)
+    {
+        $sql = 'insert into entry (user_id, title, text, created_at) values (:id, :title, :text, :created_at)';
+        $data = $this->connection()->prepare($sql);
+        $data->bindValue(':id', $id);
+        $data->bindValue(':title', $title);
+        $data->bindValue(':text', $text);
+        $data->bindValue(':created_at', date("Y-m-d H:i:s"));
+        return $data->execute();
+    }
 }

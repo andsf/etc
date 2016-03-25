@@ -55,7 +55,7 @@ $bbsData = $sql->getBbsData();
 </head>
 <body>
 <h1>簡易掲示板</h1>
-<p><a href="bbs.php"><input type="submit" value="新規登録"></a></p>
+<p><a href="bbs.php"><input type="button" value="新規登録"></a></p>
 <table>
   <tr>
     <th>投稿日</th>
