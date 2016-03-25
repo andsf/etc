@@ -12,15 +12,12 @@ class Session
 
     /**
      * セッションキーを持っているか確認
-     * @param  array   $targets ['session key', ...]
      * @return boolean
      */
-    public function has(array $targets)
+    public function has($targets)
     {
-        foreach ($targets as $sessionName) {
-            if (isset($_SESSION[$sessionName])) {
-                return true;
-            }
+        if (isset($_SESSION[$targets])) {
+            return true;
         }
         return false;
     }

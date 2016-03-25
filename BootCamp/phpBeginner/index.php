@@ -2,30 +2,45 @@
 //ファイル読み込み
 require_once './model/sql.php';
 require_once './model/session.php';
+require_once './model/cookie.php';
 
 //各ファイルのインスタンス作成
-$sql = new Sql();
+$sql     = new Sql();
 $session = new Session();
+$cookie  = new Cookie();
 
 //loginフォームからデータ取得
 $data = $_POST;
 
-//フォーム入力がない場合はリダイレクト
-if (empty($data)) {
+//ログイン情報確認
+if (!$cookie->has('loginUser') && empty($data)) {
     //バリデーション対応
     return header('Location: http://'.$_SERVER['HTTP_HOST'].'/login.php');
 }
 
-//login確認（DBの値を参照）
-$result = $sql->checkLogin($data['mailaddress'], $data['password']);
-if (!empty($result)) {
-    //loginできたら、sessionにログイン情報を保持させる
-	$addData = ['mailaddress' => $result[0]['mail_address'], 'name' => $result[0]['user_name']];
-	$session->add($addData);
-} else {
+//ユーザー情報を取得
+if (!$cookie->has('loginUser')) {
+    //login確認（DBの値を参照）
+    $userData = $sql->checkLogin($data['mailaddress'], $data['password']);
+
     //loginできなかったら、loginページにリダイレクト
-    //TODO エラーメッセージ出力
-	return header('Location: http://'.$_SERVER['HTTP_HOST'].'/login.php');
+    if (empty($userData)) {
+        //TODO エラーメッセージ出力
+    	return header('Location: http://'.$_SERVER['HTTP_HOST'].'/login.php');
+    }
+    //loginできたら、sessionにログイン情報を保持させる
+    $addData = [
+        //TODO 'cookiekey'は乱数にしたい
+        'cookiekey' => ['mail_address' => $userData['mail_address'], 'user_name' => $userData['user_name'], 'id' => $userData['id']]
+    ];
+
+    //セッションにデータをログイン情報を格納
+	$session->add($addData);
+    //クッキーにセッションキーを格納
+    $cookie->setLoginCookie('cookiekey');
+} else {
+    //セッションからユーザー情報を取得
+    $userData = $session->get($cookie->get('loginUser'));
 }
 
 //掲示板データ取得
@@ -43,19 +58,23 @@ $bbsData = $sql->getBbsData();
 <p><a href="bbs.php"><input type="submit" value="新規登録"></a></p>
 <table>
   <tr>
+    <th>投稿日</th>
     <th>タイトル</th>
-    <th>名前</th>
-    <th>編集</th>
+    <th>投稿者</th>
+    <th>操作</th>
     <th>削除</th>
-    <th>論理削除</th>
   </tr>
 <?php foreach ($bbsData as $data): ?>
   <tr>
-    <td><?= htmlspecialchars($data['title']) ?></td>
+    <td><?= htmlspecialchars($data['created_at']) ?></td>
     <td><?= htmlspecialchars($data['user_name']) ?></td>
+    <td><?= htmlspecialchars($data['title']) ?></td>
+    <?php if ($data['id'] == $userData['id']): ?>
     <td><a href="bbs_update.php?id=<?= $data['id'] ?>">編集</a></td>
     <td><a href='delete.php?id=<?= $data['id'] ?>' onClick='return check();'>削除</a></td>
-    <td><a href='deleteflg.php?id=<?= $data['id'] ?>'>論理削除</a></td>
+    <?php else: ?>
+    <td><a href="#?id=<?= $data['id'] ?>">投稿閲覧</a></td>
+    <?php endif; ?>
   </tr>
 <?php endforeach; ?>
 </table>

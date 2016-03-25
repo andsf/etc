@@ -20,7 +20,7 @@ class Sql
      */
     public function checkLogin($mail, $pass)
     {
-        $sql = 'select * from user as u
+        $sql = 'select u.id as id, u.mail_address as mail_address, l.password as password from user as u
                     inner join login as l
                     on u.id = l.user_id
                     where
@@ -31,7 +31,7 @@ class Sql
         $data->bindValue(':mail', $mail);
         $data->bindValue(':pass', $pass);
         $data->execute();
-        return $data->fetchAll(\PDO::FETCH_ASSOC);
+        return $data->fetchAll(\PDO::FETCH_ASSOC)[0];
     }
 
     /**
@@ -39,7 +39,9 @@ class Sql
      */
     public function getBbsData()
     {
-        $sql = 'select * from description as d inner join user as u on d.user_id = u.id';
+        $sql = 'select * from entry as e
+                    inner join user as u
+                    on e.user_id = u.id';
         $data = $this->connection()->prepare($sql);
         $data->execute();
         return $data->fetchAll(\PDO::FETCH_ASSOC);

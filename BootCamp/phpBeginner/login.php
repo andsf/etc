@@ -1,10 +1,21 @@
+<?php
+require_once './model/cookie.php';
+
+$cookie = new Cookie();
+
+//ログイン情報確認
+if ($cookie->has('loginUser')) {
+    //バリデーション対応
+    return header('Location: http://'.$_SERVER['HTTP_HOST'].'/index.php');
+}
+?>
  <html>
    <head>
    <title>login</title>
    </head>
    <body>
       <h1>login</h1>
-      <form method="post" action="/bootcamp/phpBeginner/index.php">
+      <form method="post" action="/index.php">
       <table>
         <tr>
           <td>メールアドレス</td>
