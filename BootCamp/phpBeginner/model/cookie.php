@@ -2,6 +2,9 @@
 
 class Cookie
 {
+    /**
+     * クッキーがあるか確認
+     */
     public function has($target)
     {
         if (isset($_COOKIE[$target])) {
@@ -10,18 +13,29 @@ class Cookie
         return false;
     }
 
+    /**
+     * クッキーを取得する
+     */
     public function get($target)
     {
         return $_COOKIE[$target];
     }
 
+    /**
+     * ログイン用のクッキーとセットする
+     */
     public function setLoginCookie($target)
     {
         setcookie('loginUser', $target);
     }
 
-    public function forget()
+    /**
+     * ログインクッキーを削除する
+     */
+    public function rmLoginCookie()
     {
-
+        if (isset($_COOKIE['loginUser'])) {
+            setcookie('loginUser');
+        }
     }
 }

@@ -12,6 +12,13 @@ $cookie  = new Cookie();
 //loginフォームからデータ取得
 $data = $_POST;
 
+//ログアウト処理
+if (isset($_GET['rm']) && $_GET['rm'] == 1) {
+    $session->logout();
+    $cookie->rmLoginCookie();
+    return header('Location: http://'.$_SERVER['HTTP_HOST'].'/login.php');
+}
+
 //ログイン情報確認
 if (!$cookie->has('loginUser') && empty($data)) {
     //バリデーション対応
@@ -55,6 +62,8 @@ $bbsData = $sql->getBbsData();
 </head>
 <body>
 <h1>簡易掲示板</h1>
+<p><a href="index.php?rm=1"><input type="button" value="ログアウト"></a></p>
+<p>loginUser: <?= $userData['user_name'] ?></p>
 <p><a href="bbs.php"><input type="button" value="新規登録"></a></p>
 <table>
   <tr>

@@ -42,9 +42,17 @@ class Session
     }
 
     /**
-     * セッションデータ削除
+     * ログアウト処理
      */
-    public function forget()
+    public function logout()
     {
+        // セッション変数を全て解除する
+        $_SESSION = [];
+        //
+        if (isset($_COOKIE["PHPSESSID"])) {
+            setcookie("PHPSESSID", '', time() - 1800, '/');
+        }
+        // 最終的に、セッションを破壊する
+        session_destroy();
     }
 }

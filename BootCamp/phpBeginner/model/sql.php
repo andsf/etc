@@ -20,7 +20,7 @@ class Sql
      */
     public function checkLogin($mail, $pass)
     {
-        $sql = 'select u.id as id, u.mail_address as mail_address, l.password as password from user as u
+        $sql = 'select u.id as id, u.mail_address as mail_address, u.user_name as user_name from user as u
                     inner join login as l
                     on u.id = l.user_id
                     where
