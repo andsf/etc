@@ -69,7 +69,7 @@ class Sql
      */
     public function getBbsDataByEntryId($entryId)
     {
-        $sql = 'select * from entry where id = :entryId deleted_flag = :flag';
+        $sql = 'select * from entry where id = :entryId and deleted_flag = :flag';
         $data = $this->connection()->prepare($sql);
         $data->bindValue(':entryId', $entryId);
         $data->bindValue(':flag', self::DELETE_FLAG_OFF);

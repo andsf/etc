@@ -18,11 +18,7 @@ if (!$cookie->has('loginUser')) {
 //削除対象のentryidを取得
 $eid = $_GET['eid'];
 
-$ret = $sql->delete($eid);
-
-//判定
-if ($ret) {
-    return header('Location: http://'.$_SERVER['HTTP_HOST'].'/index.php');
-} else {
-    //TODO エラー処理
-}
+//削除
+$sql->delete($eid);
+//indexページへリダイレクト
+return header('Location: http://'.$_SERVER['HTTP_HOST'].'/index.php');

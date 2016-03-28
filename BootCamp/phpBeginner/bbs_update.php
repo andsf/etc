@@ -15,6 +15,12 @@ if (!$cookie->has('loginUser')) {
     return header('Location: http://'.$_SERVER['HTTP_HOST'].'/login.php');
 }
 $eid = $_GET['eid'];
+
+//entry id がない場合はリダイレクト
+if (empty($eid)) {
+    return header('Location: http://'.$_SERVER['HTTP_HOST'].'/index.php');
+}
+
 $data = $sql->getBbsDataByEntryId($eid);
 
 ?>
@@ -25,7 +31,9 @@ $data = $sql->getBbsDataByEntryId($eid);
   <title>入力フォーム</title>
 </head>
 <body>
-<form action="write.php" method="post">
+<h1>簡易掲示板</h1>
+<p><a href="/index.php">TOPページへ戻る</a><p>
+<form action="/write.php" method="post">
   <P>タイトル：</p><br>
   <input type="text" name="title" value="<?= htmlspecialchars($data['title']) ?>"><br>
   <p>内容：</p><br>

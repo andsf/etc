@@ -18,7 +18,7 @@ if (!$cookie->has('loginUser')) {
 <body>
   <h1>簡易掲示板</h1>
   <p><a href="/index.php">TOPページへ戻る</a><p>
-  <form action="write.php" method="post" name="b1">
+  <form action="/write.php" method="post" name="b1">
     <p>タイトル</br><input type="text" name="title"></p>
     <p>内容</br><textarea name="text"></textarea></p>
     <p><input type="submit" value="登録" name="b1"></a></p>

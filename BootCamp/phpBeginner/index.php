@@ -32,12 +32,10 @@ if (!$cookie->has('loginUser')) {
 
     //loginできなかったら、loginページにリダイレクト
     if (empty($userData)) {
-        //TODO エラーメッセージ出力
     	return header('Location: http://'.$_SERVER['HTTP_HOST'].'/login.php');
     }
     //loginできたら、sessionにログイン情報を保持させる
     $addData = [
-        //TODO 'cookiekey'は乱数にしたい
         'cookiekey' => ['mail_address' => $userData['mail_address'], 'user_name' => $userData['user_name'], 'id' => $userData['id']]
     ];
 

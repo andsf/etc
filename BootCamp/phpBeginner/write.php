@@ -24,19 +24,15 @@ $data = $_POST;
 //ユーザーデータ取得
 $userData = $session->get($cookie->get('loginUser'));
 //テキストがあるか確認、ない場合はnullを入れる
-$text = isset($date['text']) ? $data['text'] : null;
+$text = isset($data['text']) ? $data['text'] : null;
 //編集処理
 if (isset($data['eid'])) {
     //update文　実行
-    $ret = $sql->update($data['eid'], $data['title'], $text);
+    $sql->update($data['eid'], $data['title'], $text);
 } else {
     //insert文　実行
-    $ret = $sql->insert($userData['id'], $data['title'], $text);
+    $sql->insert($userData['id'], $data['title'], $text);
 }
 
-//判定
-if ($ret) {
-    return header('Location: http://'.$_SERVER['HTTP_HOST'].'/index.php');
-} else {
-    //TODO エラー処理
-}
+//indexページへリダイレクト
+return header('Location: http://'.$_SERVER['HTTP_HOST'].'/index.php');
