@@ -21,13 +21,18 @@ if ($_SERVER["REQUEST_METHOD"] == 'GET') {
 
 //postデータを取得
 $data = $_POST;
-
 //ユーザーデータ取得
 $userData = $session->get($cookie->get('loginUser'));
 //テキストがあるか確認、ない場合はnullを入れる
 $text = isset($date['text']) ? $data['text'] : null;
-//insert文　実行
-$ret = $sql->insert($userData['id'], $data['title'], $text);
+//編集処理
+if (isset($data['eid'])) {
+    //update文　実行
+    $ret = $sql->update($data['eid'], $data['title'], $text);
+} else {
+    //insert文　実行
+    $ret = $sql->insert($userData['id'], $data['title'], $text);
+}
 
 //判定
 if ($ret) {

@@ -39,7 +39,8 @@ class Sql
      */
     public function getBbsData()
     {
-        $sql = 'select * from entry as e
+        $sql = 'select e.id as eid, e.title, e.text, e.file_path, e.created_at, u.user_name, u.id as uid
+                    from entry as e
                     inner join user as u
                     on e.user_id = u.id';
         $data = $this->connection()->prepare($sql);
@@ -50,7 +51,7 @@ class Sql
     /**
      * 掲示板新規投稿
      */
-    public function insert($id, $title, $text = null)
+    public function insert($id, $title, $text)
     {
         $sql = 'insert into entry (user_id, title, text, created_at) values (:id, :title, :text, :created_at)';
         $data = $this->connection()->prepare($sql);
@@ -58,6 +59,31 @@ class Sql
         $data->bindValue(':title', $title);
         $data->bindValue(':text', $text);
         $data->bindValue(':created_at', date("Y-m-d H:i:s"));
+        return $data->execute();
+    }
+
+    /**
+     * 個別の投稿内容を取得する
+     */
+    public function getBbsDataByEntryId($entryId)
+    {
+        $sql = 'select * from entry where id = :entryId';
+        $data = $this->connection()->prepare($sql);
+        $data->bindValue(':entryId', $entryId);
+        $data->execute();
+        return $data->fetchAll(\PDO::FETCH_ASSOC)[0];
+    }
+
+    /**
+     * 投稿内容を編集する
+     */
+    public function update($eid, $title, $text)
+    {
+        $sql = 'update entry set title = :title, text = :text where id = :eid';
+        $data = $this->connection()->prepare($sql);
+        $data->bindValue(':title', $title);
+        $data->bindValue(':text', $text);
+        $data->bindValue(':eid', $eid);
         return $data->execute();
     }
 }

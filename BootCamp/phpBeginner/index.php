@@ -62,18 +62,17 @@ $bbsData = $sql->getBbsData();
     <th>タイトル</th>
     <th>投稿者</th>
     <th>操作</th>
-    <th>削除</th>
   </tr>
-<?php foreach ($bbsData as $data): ?>
+<?php foreach ($bbsData as $bbs): ?>
   <tr>
-    <td><?= htmlspecialchars($data['created_at']) ?></td>
-    <td><?= htmlspecialchars($data['user_name']) ?></td>
-    <td><?= htmlspecialchars($data['title']) ?></td>
-    <?php if ($data['id'] == $userData['id']): ?>
-    <td><a href="bbs_update.php?id=<?= $data['id'] ?>">編集</a></td>
-    <td><a href='delete.php?id=<?= $data['id'] ?>' onClick='return check();'>削除</a></td>
+    <td><?= htmlspecialchars($bbs['created_at']) ?></td>
+    <td><?= htmlspecialchars($bbs['user_name']) ?></td>
+    <td><?= htmlspecialchars($bbs['title']) ?></td>
+    <?php if ($bbs['uid'] == $userData['id']): ?>
+    <td><a href="bbs_update.php?eid=<?= $bbs['eid'] ?>">編集</a></td>
+    <td><a href='delete.php?eid=<?= $bbs['eid'] ?>' onClick='return check();'>削除</a></td>
     <?php else: ?>
-    <td><a href="#?id=<?= $data['id'] ?>">投稿閲覧</a></td>
+    <td><a href="#?id=<?= $bbs['eid'] ?>">投稿閲覧</a></td>
     <?php endif; ?>
   </tr>
 <?php endforeach; ?>
