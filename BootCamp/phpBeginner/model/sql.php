@@ -42,8 +42,10 @@ class Sql
         $sql = 'select e.id as eid, e.title, e.text, e.file_path, e.created_at, u.user_name, u.id as uid
                     from entry as e
                     inner join user as u
-                    on e.user_id = u.id';
+                    on e.user_id = u.id
+                    where e.deleted_flag = :flag';
         $data = $this->connection()->prepare($sql);
+        $data->bindValue(':flag', self::DELETE_FLAG_OFF);
         $data->execute();
         return $data->fetchAll(\PDO::FETCH_ASSOC);
     }
@@ -67,9 +69,10 @@ class Sql
      */
     public function getBbsDataByEntryId($entryId)
     {
-        $sql = 'select * from entry where id = :entryId';
+        $sql = 'select * from entry where id = :entryId deleted_flag = :flag';
         $data = $this->connection()->prepare($sql);
         $data->bindValue(':entryId', $entryId);
+        $data->bindValue(':flag', self::DELETE_FLAG_OFF);
         $data->execute();
         return $data->fetchAll(\PDO::FETCH_ASSOC)[0];
     }
@@ -83,6 +86,18 @@ class Sql
         $data = $this->connection()->prepare($sql);
         $data->bindValue(':title', $title);
         $data->bindValue(':text', $text);
+        $data->bindValue(':eid', $eid);
+        return $data->execute();
+    }
+
+    /**
+     * 投稿内容を削除する（論理削除）
+     */
+    public function delete($eid)
+    {
+        $sql = 'update entry set deleted_flag = :flag where id = :eid';
+        $data = $this->connection()->prepare($sql);
+        $data->bindValue(':flag', self::DELETE_FLAG_ON);
         $data->bindValue(':eid', $eid);
         return $data->execute();
     }
